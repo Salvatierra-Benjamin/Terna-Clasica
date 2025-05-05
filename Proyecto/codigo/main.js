@@ -13,14 +13,28 @@ botones.forEach(boton => {
         }
 
         if (boton.id === "borrar") {
-            pantalla.textcontent = pantalla.textContent.slice(0, -1);
+            if (pantalla.textContent.length === 1 || pantalla.textContent === "Error") {
+                pantalla.textContent = "0";
+            } else {
+                pantalla.textContent = pantalla.textContent.slice(0, -1);
+            }
             return;
         }
 
-        if (pantalla.textContent === '0') {
+        if (boton.id === "igual") {
+            try {
+                pantalla.textContent = eval(pantalla.textContent);
+            } catch {
+                pantalla.textContent = "Error";
+            }
+
+            return;
+        }
+
+        if (pantalla.textContent === '0' || pantalla.textContent === "Error") {
             pantalla.textContent = botonApretado;
         } else {
-            pantalla.textContent += pantalla.textContent;
+            pantalla.textContent += botonApretado;
         }
     });
 });
